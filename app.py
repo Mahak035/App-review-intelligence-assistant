@@ -237,6 +237,8 @@ def delete_dataset():
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
 
+if __name__ == "__main__":
     port = int(os.environ.get("PORT", 9000))
     print(f"Launching TecOrb Mobile App Analytics & RAG Chatbot on http://127.0.0.1:{port}")
     app.run(host="0.0.0.0", port=port, debug=False, use_reloader=False)
+
