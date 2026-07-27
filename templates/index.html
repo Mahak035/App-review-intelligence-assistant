@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internal App Review Intelligence Assistant - Company Engineering Dashboard</title>
+    <!-- Readable student project typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- Internal Engineering Header -->
+        <header class="main-header">
+            <div class="logo-area">
+                <div class="logo-badge">Internal Company Intelligence</div>
+                <div>
+                    <h1>AI App Review Intelligence Assistant</h1>
+                    <p class="subtitle">Multi-Source RAG: App Reviews, Release Notes, Known Issues, FAQ & Support Docs</p>
+                </div>
+            </div>
+            <!-- Interactive Action Buttons -->
+            <div class="header-actions">
+                <button class="header-btn primary-btn" onclick="toggleOverviewModal()">ℹ️ Engineering Pipeline</button>
+                <button class="header-btn secondary-btn" onclick="switchTab('analytics')">📊 Internal Analytics</button>
+                <button class="header-btn secondary-btn" onclick="switchTab('chatbot')">🤖 Product Intelligence Chatbot</button>
+                <button class="header-btn outline-btn" onclick="toggleSettingsModal()">⚙️ Gemini Key</button>
+            </div>
+        </header>
+
+        <!-- Navigation Workspace Tabs -->
+        <nav class="nav-tabs">
+            <button class="tab-btn active" id="tab-analytics-btn" onclick="switchTab('analytics')">
+                📊 Internal Product Analytics & Version Regressions
+            </button>
+            <button class="tab-btn" id="tab-chatbot-btn" onclick="switchTab('chatbot')">
+                🤖 Multi-Source RAG Product Assistant
+            </button>
+            <button class="tab-btn" id="tab-datasets-btn" onclick="switchTab('datasets')">
+                📁 Dataset Management & Upload
+            </button>
+            <button class="tab-btn" id="tab-knowledge-btn" onclick="switchTab('knowledge')">
+                📜 Release Notes, FAQ & Support Documents
+            </button>
+        </nav>
+
+        <!-- Interactive Overview & Architecture Modal -->
+        <div class="modal-overlay" id="overview-modal" style="display: none;" onclick="closeModalOnOverlay(event)">
+            <div class="modal-card">
+                <div class="modal-header">
+                    <h3>ℹ️ Internal Company Intelligence Pipeline & RAG System Architecture</h3>
+                    <span class="close-btn" onclick="toggleOverviewModal()">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <p><strong>System Architecture</strong>: Designed as an internal product & OS engineering intelligence platform. Retrieves from 5 knowledge domains (App Reviews, Release Notes, Known Issues, FAQ, Support Docs) using Pandas data pipelines and NumPy cosine vector similarity.</p>
+                    <hr>
+                    <p><strong>1. Pandas & NumPy Data Engine</strong>: Version-level sentiment aggregation, bug density isolation, and praised feature ranking.</p>
+                    <p><strong>2. Multi-Source RAG Retrieval</strong>: Vector dot-product matrix over release notes, support tickets, and FAQ chunks.</p>
+                    <div class="math-box">
+                        $$\text{Cosine Similarity} = \frac{\mathbf{q} \cdot \mathbf{d}}{\|\mathbf{q}\|_2 \|\mathbf{d}\|_2}$$
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 1: INTERNAL PRODUCT ANALYTICS WORKSPACE -->
+        <main class="tab-content active" id="tab-analytics">
+            <div class="analytics-layout">
+                <!-- KPI Metric Cards -->
+                <div class="kpi-row">
+                    <div class="kpi-card">
+                        <span class="kpi-label">Ingested App Reviews</span>
+                        <h3 id="metric-total-reviews">16</h3>
+                        <span class="kpi-sub">Pandas Ingest Pipeline</span>
+                    </div>
+                    <div class="kpi-card">
+                        <span class="kpi-label">Average App Rating</span>
+                        <h3 id="metric-avg-rating">3.12 / 5</h3>
+                        <span class="kpi-sub">Vectorized Rating Mean</span>
+                    </div>
+                    <div class="kpi-card">
+                        <span class="kpi-label">Positive Sentiment</span>
+                        <h3 id="metric-positive-pct">50.0%</h3>
+                        <span class="kpi-sub">Pandas Boolean Index</span>
+                    </div>
+                </div>
+
+                <!-- Side-by-Side App Comparison Module -->
+                <div class="card compare-card">
+                    <div class="card-header">
+                        <h3>⚖️ Side-by-Side Application Feedback Comparison Engine</h3>
+                        <span class="filter-count-badge">Pandas Analytical Aggregation</span>
+                    </div>
+                    <div class="compare-controls">
+                        <div class="filter-group">
+                            <label for="compare-app1">App 1:</label>
+                            <select id="compare-app1" onchange="executeAppComparison()"></select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="compare-app2">App 2:</label>
+                            <select id="compare-app2" onchange="executeAppComparison()"></select>
+                        </div>
+                        <button class="header-btn primary-btn" style="margin-top: auto; height: 40px;" onclick="executeAppComparison()">Compare Apps</button>
+                    </div>
+
+                    <!-- Comparison Results Box -->
+                    <div class="compare-results-container" id="compare-results" style="display: none; margin-top: 16px;">
+                        <!-- Rendered via script.js -->
+                    </div>
+                </div>
+
+                <!-- Interactive Filter Controls Card -->
+                <div class="card filter-card">
+                    <div class="card-header">
+                        <h3>🔍 Internal Feedback Explorer & Category Filter</h3>
+                        <span class="filter-count-badge" id="filter-match-count">Showing feedback logs</span>
+                    </div>
+                    <div class="filter-controls">
+                        <div class="filter-group">
+                            <label for="filter-app">Select Mobile App:</label>
+                            <select id="filter-app" onchange="applyReviewFilters()">
+                                <option value="All">All 57+ Mobile Apps</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="filter-app-search">Search App Keyword:</label>
+                            <input type="text" id="filter-app-search" placeholder="Type app name (e.g. Instagram, Spotify...)" oninput="applyReviewFilters()" list="apps-datalist" autocomplete="off">
+                            <datalist id="apps-datalist"></datalist>
+                        </div>
+
+                        <div class="filter-group">
+                            <label for="filter-type">Feedback Category:</label>
+                            <select id="filter-type" onchange="applyReviewFilters()">
+                                <option value="All">All Categories</option>
+                                <option value="Bug/Crash">Bug / Crash</option>
+                                <option value="Feature Request">Feature Request</option>
+                                <option value="Performance">Performance Issue</option>
+                                <option value="Praise">User Praise</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="filter-os">Operating System / Platform:</label>
+                            <select id="filter-os" onchange="applyReviewFilters()">
+                                <option value="All">All Platforms</option>
+                                <option value="iOS">iOS</option>
+                                <option value="Android">Android</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="filter-sentiment">User Sentiment:</label>
+                            <select id="filter-sentiment" onchange="applyReviewFilters()">
+                                <option value="All">All Sentiments</option>
+                                <option value="Positive">Positive</option>
+                                <option value="Negative">Negative</option>
+                                <option value="Neutral">Neutral</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reviews Table Placeholder -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>📱 Ingested Review Feedback Logs (Company Internal)</h3>
+                    </div>
+                    <div class="table-container">
+                        <table id="reviews-table">
+                            <thead>
+                                <tr>
+                                    <th>App Name & Version</th>
+                                    <th>Platform</th>
+                                    <th>Feedback Type</th>
+                                    <th>Rating</th>
+                                    <th>Sentiment</th>
+                                    <th>User Feedback Text</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td colspan="6" class="text-center">Loading feedback data...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- TAB 2: AI TECHNICAL CHATBOT WORKSPACE -->
+        <main class="tab-content" id="tab-chatbot">
+            <div class="chatbot-layout">
+                <div class="card chat-card">
+                    <div class="card-header chat-header">
+                        <div>
+                            <h3>Internal App Review Intelligence AI Chatbot</h3>
+                            <p class="small-text">RAG Retrieval across App Reviews, Release Notes (v4.1), Known Issues, FAQ & Support Docs</p>
+                        </div>
+                        <button class="api-key-toggle" onclick="toggleSettingsModal()">
+                            ⚙️ Gemini API Key
+                        </button>
+                    </div>
+
+                    <!-- Gemini API Key Input Bar -->
+                    <div class="gemini-key-bar" id="gemini-key-bar" style="display: none;">
+                        <input type="password" id="gemini-key-input" placeholder="Paste optional Gemini API Key (leaves blank for built-in engine)...">
+                    </div>
+
+                    <!-- Quick Prompt Suggestions tailored for Engineering Q&A -->
+                    <div class="prompt-suggestions">
+                        <span class="suggestion-tag" onclick="fillQueryAndSwitch('Why are users complaining after version 4.1?')">🚨 Why complaints after v4.1?</span>
+                        <span class="suggestion-tag" onclick="fillQueryAndSwitch('Which feature receives the most praise?')">⭐ Which feature gets most praise?</span>
+                        <span class="suggestion-tag" onclick="fillQueryAndSwitch('What do release notes say about version 4.1?')">📜 Version 4.1 Release Notes</span>
+                        <span class="suggestion-tag" onclick="fillQueryAndSwitch('What are the top known issues on iOS 17?')">🐛 Known Issues on iOS 17</span>
+                        <span class="suggestion-tag" onclick="fillQueryAndSwitch('FAQ: Why is app crashing on iOS 17 after update?')">❓ FAQ: iOS 17 Launch Crash</span>
+                        <span class="suggestion-tag" onclick="fillQueryAndSwitch('What does Support Doc #501 say about camera permission?')">🛠️ Support Doc #501 Fix</span>
+                    </div>
+
+                    <!-- Chat Messages Window -->
+                    <div class="chat-messages" id="chat-messages">
+                        <div class="message bot-message">
+                            <div class="message-sender">Product Intelligence Assistant</div>
+                            <div class="message-text">Hello! I am your Internal Product & OS Intelligence Assistant. Ask me questions like <em>"Why are users complaining after version 4.1?"</em> or <em>"Which feature receives the most praise?"</em>.</div>
+                        </div>
+                    </div>
+
+                    <!-- Chat Input Area -->
+                    <form class="chat-input-area" id="chat-form">
+                        <input type="text" id="chat-input" placeholder="Ask intelligence query (e.g., Why are users complaining after version 4.1 or Which feature receives most praise)..." required autocomplete="off">
+                        <button type="submit" id="send-btn">Send</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+
+        <!-- TAB: DATASET MANAGEMENT WORKSPACE -->
+        <main class="tab-content" id="tab-datasets">
+            <div class="dataset-management-layout">
+                <div class="card upload-card">
+                    <div class="card-header">
+                        <h3>📤 Upload & Ingest New Dataset</h3>
+                        <span class="filter-count-badge">Dynamic Ingestion & Vector Indexing</span>
+                    </div>
+                    <div class="upload-dropzone" id="drop-zone" onclick="document.getElementById('dataset-file-input').click()">
+                        <div class="upload-icon">📁</div>
+                        <h4>Drag & Drop CSV / TXT files here or click to browse</h4>
+                        <p class="dropzone-sub">Supports Review Datasets (.csv) and Knowledge Documents (.txt)</p>
+                        <input type="file" id="dataset-file-input" accept=".csv,.txt" style="display:none;" onchange="handleFileSelected(event)">
+                        <div id="file-chosen-name" class="file-chosen-name">No file selected</div>
+                    </div>
+                    
+                    <div class="upload-controls">
+                        <div class="filter-group">
+                            <label for="dataset-type-select">Target Dataset Category:</label>
+                            <select id="dataset-type-select">
+                                <option value="review_csv">Play Store / App Store Reviews (.csv)</option>
+                                <option value="knowledge_txt">Knowledge Base Document (.txt)</option>
+                            </select>
+                        </div>
+                        <button class="header-btn primary-btn upload-btn" onclick="uploadSelectedDataset()">🚀 Ingest Dataset</button>
+                    </div>
+                    <div id="upload-status-banner" class="status-banner" style="display: none;"></div>
+                </div>
+
+                <div class="card inventory-card">
+                    <div class="card-header">
+                        <h3>📊 Dataset Inventory & File Registry</h3>
+                        <button class="header-btn outline-btn" onclick="loadDatasetInventory()">🔄 Refresh List</button>
+                    </div>
+                    <div class="table-container">
+                        <table class="review-table">
+                            <thead>
+                                <tr>
+                                    <th>Dataset File Name</th>
+                                    <th>Dataset Type</th>
+                                    <th>File Size</th>
+                                    <th>Records / Chunks</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dataset-inventory-tbody">
+                                <tr><td colspan="5" style="text-align:center;">Loading dataset inventory...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- TAB 3: TECH STACK & KNOWLEDGE BASE WORKSPACE -->
+        <main class="tab-content" id="tab-knowledge">
+            <div class="knowledge-layout">
+                <div class="card-grid">
+                    <div class="card">
+                        <h3>📜 1. App Store & Play Store Reviews (20,000+ Feedback)</h3>
+                        <p class="card-desc">Ingested customer review sentiment, rating distributions, and version-level user feedback logs.</p>
+                    </div>
+                    <div class="card">
+                        <h3>📜 2. Official Release Notes (v4.1 & v4.0)</h3>
+                        <p class="card-desc">Version release documentation detailing new features (C++ Metal shaders, ProMotion 120Hz) and identified regressions.</p>
+                    </div>
+                    <div class="card">
+                        <h3>📜 3. Known Issues Matrix</h3>
+                        <p class="card-desc">Technical engineering bug logs: iOS 17 camera launch crash (#101), battery overheating (#102), A2DP Bluetooth audio lag (#103).</p>
+                    </div>
+                    <div class="card">
+                        <h3>📜 4. Frequently Asked Questions (FAQ)</h3>
+                        <p class="card-desc">Internal engineering Q&A on iOS 17 permission prompts, version 4.1 regressions, and praised features.</p>
+                    </div>
+                    <div class="card" style="grid-column: span 2;">
+                        <h3>📜 5. Support Documents & Engineering Fixes</h3>
+                        <p class="card-desc">Support Doc #501 (NSCameraUsageDescription key fix), Doc #502 (SQLite database vacuum), and Doc #503 (5G IPv6 socket reset).</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="main-footer">
+            <p>Internal Company App Review Intelligence Assistant &copy; 2026 | Built with Python, Pandas, NumPy & RAG</p>
+        </footer>
+    </div>
+
+    <script src="static/script.js"></script>
+    <script src="../static/script.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

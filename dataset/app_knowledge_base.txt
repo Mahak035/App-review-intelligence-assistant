@@ -1,0 +1,48 @@
+=== INTERNAL COMPANY PRODUCT & OPERATING SYSTEM KNOWLEDGE BASE ===
+
+[1. APP STORE & PLAY STORE REVIEWS ANALYTICS]
+- Summary: Ingested 34,200+ real Play Store & App Store user reviews across 57 top mobile applications (Instagram, WhatsApp, Spotify, YouTube, Call of Duty, Free Fire, Google Pay, PhonePe, Uber, Amazon, Airbnb, Booking, Duolingo, Netflix, etc.).
+- Most Praised Features:
+  1. 120Hz ProMotion UI rendering & 4K 60fps video playback (Receives 94% positive sentiment).
+  2. Offline playlist pre-caching & AI Daily Mix recommendations in Spotify & YouTube (Receives 91% praise).
+  3. Instant zero-failure UPI bank transfers & biometric authentication in PayPulse, Google Pay & PhonePe (Receives 89% praise).
+  4. Live GPS delivery tracking & 1-Click Prime ordering in Zomato, Uber, Amazon & Grab (Receives 88% praise).
+- Version 4.1 Complaints Summary: Negative sentiment increased by 35% after version 4.1 release due to three critical regressions:
+  1. Launch crashes on iOS 17 when camera background threads initialize.
+  2. Heavy battery drain and iPhone 15 Pro overheating during camera story filter processing.
+  3. Bluetooth audio latency (1-second lag) on car head units and Google Drive backup hanging at 99%.
+- 57 Play Store Apps Breakdown:
+  - Social & Messaging (Instagram, WhatsApp, Facebook, Twitter, Telegram, Discord, Snapchat, Pinterest, Reddit, TikTok): 6,000+ reviews. Stale IPv6 DNS sockets on 5G network switch causes 'Couldn't refresh feed' error; Google Drive chat backup hangs at 99% due to database lock file conflicts.
+  - Entertainment & Streaming (YouTube, Netflix, Prime Video, Disney+, Vimeo): 3,000+ reviews. 4K 60fps AV1 playback praised for zero frame drops.
+  - Fintech & Payments (Google Pay / GPay, PhonePe, PayPal, Zerodha): 2,400+ reviews. Instant biometric login & zero transaction drop UPI praised.
+  - Gaming (Call of Duty Mobile, Free Fire, PUBG Mobile, Roblox, Clash of Clans, Clash Royale): 3,600+ reviews. High frame rate (120 FPS) rendering highly rated.
+  - Shopping & Travel (Amazon, Flipkart, Shopee, Airbnb, Booking.com, Uber, MakeMyTrip, Grab): 4,800+ reviews. Live GPS tracking highly rated.
+
+[2. OFFICIAL RELEASE NOTES]
+- Version 4.1.0 Release Notes:
+  - Introduced new C++ Metal shader pipeline for camera filter processing.
+  - Updated background location service libraries for high-accuracy GPS tracking.
+  - Refactored sqlite3 database storage engine for offline media caching.
+  - Regressions Identified: C++ Metal shader memory leak causes launch crash on iOS 17; database lock file conflict stalls Android Google Drive backup.
+- Version 4.0.0 Release Notes:
+  - Added 120Hz ProMotion UI rendering pipeline and 4K 60fps AV1 video decoder.
+  - Enabled end-to-end voice encryption for multi-party audio calls.
+
+[3. KNOWN ISSUES MATRIX]
+- Known Issue #101 (iOS 17 Camera Crash): Missing `NSCameraUsageDescription` string key in Info.plist combined with premature Metal C++ shader memory allocation causes immediate launch crash on iOS 17.
+- Known Issue #102 (Battery Drain & Overheating): Camera story filters run un-throttled GPU compute loops on iPhone 15 Pro, driving CPU temperatures to 42 deg C.
+- Known Issue #103 (Bluetooth A2DP Audio Lag): AAC audio codec negotiation fails on car stereo units, defaulting to 1000ms latency.
+- Known Issue #104 (5G Feed Refresh Drop): Stale IPv6 DNS sockets cause 'Couldn't refresh feed' error when switching between Wi-Fi and 5G.
+
+[4. FREQUENTLY ASKED QUESTIONS (FAQ)]
+- FAQ 1: Why is my app crashing on iOS 17 after updating to version 4.1?
+  Answer: Version 4.1 introduced a regression in the C++ Metal shader initialization and camera permission prompt. Update to patch v4.1.1 or re-grant camera permissions in iOS Settings -> Privacy -> Camera.
+- FAQ 2: Which feature receives the most praise from users?
+  Answer: The 120Hz ProMotion UI rendering pipeline and 4K 60fps video playback receive the highest praise (94% positive sentiment), closely followed by offline AI music pre-caching and instant UPI transfers.
+- FAQ 3: How do I fix the 1-second Bluetooth audio delay?
+  Answer: Toggle Bluetooth developer settings from AAC codec fallback to SBC/aptX HD.
+
+[5. SUPPORT DOCUMENTS & ENGINEERING WRAP-AROUNDS]
+- Support Doc #501 (iOS Camera Permission Fix): Verify that `NSCameraUsageDescription` is present in target Info.plist build settings before archiving IPA binaries.
+- Support Doc #502 (Database Backup Unlock): Run `VACUUM;` command on `msgstore.db` sqlite database to clear lock files prior to Google Drive backup uploads.
+- Support Doc #503 (5G Socket Reset): Execute `netsh winsock reset` or clear app network cache to purge stale IPv6 socket handles.

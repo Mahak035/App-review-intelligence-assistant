@@ -1,0 +1,17 @@
+review_id,date,app_name,app_version,category,feedback_type,rating,user_sentiment,review_text,device_os
+REV001,2026-07-01,Instagram,4.1.0,Social,Bug/Crash,1,Negative,"App crashes immediately on launch after updating to version 4.1 on iOS 17.",iOS
+REV002,2026-07-02,Instagram,4.1.0,Social,Bug/Crash,1,Negative,"Version 4.1 update causes severe battery drain and phone overheating within 10 minutes of camera usage.",iOS
+REV003,2026-07-03,Instagram,4.1.0,Social,Performance,2,Negative,"Feed scrolling feels laggy and choppy after version 4.1 release on Android.",Android
+REV004,2026-07-04,WhatsApp,4.1.0,Communication,Praise,5,Positive,"End-to-end voice encryption works flawlessly and call audio quality is crystal clear.",Android
+REV005,2026-07-05,WhatsApp,4.1.0,Communication,Bug/Crash,2,Negative,"Version 4.1 media backup to Google Drive hangs at 99% due to database lock file.",Android
+REV006,2026-07-06,Spotify,4.1.0,Music & Audio,Praise,5,Positive,"Offline playlist downloads and daily AI mix recommendations are top notch!",iOS
+REV007,2026-07-07,Spotify,4.1.0,Music & Audio,Performance,2,Negative,"Bluetooth audio delays by 1 second when connecting to car stereo AAC codec in v4.1.",iOS
+REV008,2026-07-08,YouTube,4.1.0,Video Players,Praise,5,Positive,"4K 60fps video playback is silky smooth with zero frame drops.",Android
+REV009,2026-07-09,YouTube,4.1.0,Video Players,Bug/Crash,1,Negative,"Background audio pauses automatically when screen turns off on iOS in version 4.1.",iOS
+REV010,2026-07-10,PayPulse,4.1.0,Finance,Bug/Crash,1,Negative,"Version 4.1 camera permission prompt crashes on iOS 17 when scanning QR code.",iOS
+REV011,2026-07-11,PayPulse,4.1.0,Finance,Praise,5,Positive,"Instant zero-failure UPI bank transfers and clean biometric authentication.",Android
+REV012,2026-07-12,Zomato,4.1.0,Food & Drink,Praise,5,Positive,"Live GPS tracking of delivery partner is accurate and order arrived hot!",Android
+REV013,2026-07-13,Uber,4.1.0,Travel & Mobility,Praise,4,Positive,"Driver assigned in 2 minutes and fare estimate was exact.",iOS
+REV014,2026-07-14,Amazon,4.1.0,Shopping,Praise,5,Positive,"1-Click ordering and fast Prime delivery tracking make shopping effortless.",iOS
+REV015,2026-07-15,Instagram,4.0.0,Social,Praise,5,Positive,"120Hz ProMotion UI rendering is silky smooth in version 4.0.",iOS
+REV016,2026-07-16,Spotify,4.0.0,Music & Audio,Feature Request,4,Positive,"Add lossless HiFi audio streaming setting for audiophile headphones!",iOS
