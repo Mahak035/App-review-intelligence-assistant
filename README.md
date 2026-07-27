@@ -1,6 +1,6 @@
 # TecOrb Mobile App Analytics & GenAI RAG Hardware Assistant
 
-A dual-engine Python web application created for **TecOrb Solutions Mobile Development** onboarding & Academic Viva Defense.
+A dual-engine Python web application created for **TecOrb Solutions Mobile Development** to test and reviews apps on different operating systems.
 
 ## 🚀 Key Modules & Architecture
 
